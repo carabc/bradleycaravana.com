@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  font-family: "Segoe UI";
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #121212; /*Dark Grey From Theme*/
+}
+
+.hl {
+  color: #2cff8e;
+}
+
+.smallSubHeaderHighlight {
+  color: #252525;
+}
