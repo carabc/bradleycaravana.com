@@ -1,4 +1,12 @@
 import Head from "next/head";
+import MobileNagivation from "./MobileNavigation/MobileNavigation";
+import Navigation from "./Navigation/Navigation";
+import styled from "styled-components";
+
+const ContentContainerDivStyled = styled.div`
+  .navContainer {
+  }
+`;
 
 export default function Layout({
   children,
@@ -17,7 +25,13 @@ export default function Layout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       </Head>
-      {children}
+      <ContentContainerDivStyled>
+        <div className="navContainer">
+          <Navigation />
+        </div>
+        <MobileNagivation />
+        {children}
+      </ContentContainerDivStyled>
     </>
   );
 }
