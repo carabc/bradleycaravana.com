@@ -52,11 +52,7 @@ export default function Navigation() {
             <a aria-current={router.pathname === "/" && "page"}>Home</a>
           </Link>
         </li>
-        <li>
-          <Link href="/about" legacyBehavior>
-            <a aria-current={router.pathname === "/about" && "page"}>About</a>
-          </Link>
-        </li>
+
         <li>
           <Link href="/blog" legacyBehavior>
             <a aria-current={router.pathname === "/blog" && "page"}>Blog</a>

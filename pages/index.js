@@ -4,6 +4,7 @@ import { withTheme } from "styled-components";
 import Image from "next/image";
 import headshot from "../public/images/headshot.png";
 import PostCard from "@/components/PostCard/PostCard";
+import Link from "next/link";
 
 const MainStyled = styled.main`
   display: flex;
@@ -17,7 +18,7 @@ const MainStyled = styled.main`
     align-items: center;
     color: #fff;
     h1 {
-      margin: 0 0 0.5em 0;
+      margin: 0 0 0 0;
       font-size: 2em;
     }
 
@@ -47,14 +48,52 @@ const MainStyled = styled.main`
 
     .headerTitles {
       order: 1;
+      align-items: start;
 
-      h1 {
+      .subHeaderBlock p {
         text-align: start;
       }
     }
 
     .imageContainer {
       order: 2;
+    }
+  }
+`;
+
+const SectionAboutStyled = styled.section`
+  color: #fff;
+  width: 90%;
+  margin: 0 auto;
+
+  h2 {
+    text-align: center;
+  }
+
+  .textContainer {
+    p {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.lg}) {
+    width: 45%;
+
+    h2 {
+      text-align: initial;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.md}) {
+    .textContainer {
+      p {
+        font-size: 1rem;
+      }
+
+      p a {
+        color: ${({ theme }) => theme.dark.hl};
+        text-decoration: none;
+      }
     }
   }
 `;
@@ -82,6 +121,8 @@ const SectionBlogPostStyled = styled.section`
   }
 
   @media (min-width: ${({ theme }) => theme.lg}) {
+    margin: 2em auto 0 auto;
+
     .header {
       text-align: initial;
     }
@@ -118,9 +159,52 @@ export default withTheme(function Home() {
           />
         </div>
       </MainStyled>
+      <SectionAboutStyled>
+        <h2>
+          About <span className="hl">Me</span>
+        </h2>
+        <div className="textContainer">
+          <p>
+            Hey, my name is Bradley Caravana. But you probably knew that already
+            based on the domain and the gigantic text at the top. I&apos;m a
+            Full Stack Developer at Maxim Group LLC. programming in C#,
+            Javascript, SQL, NodeJS, Express, and React.
+          </p>
+          <p>
+            I work in a team of like minded programmers who are always looking
+            to automate and improve the workflow of not only us, but the
+            employees of our firm.
+          </p>
+          <p>
+            I live on (not in) Long Island, New York, and attended classes at
+            Farmingdale State College for Computer Programming & Information
+            Technology. I graduated in 2021 with a 3.9 GPA (so close!) and
+            honors.
+          </p>
+          <p>
+            When my head isn&apos;t buried in code and documentation, I love to
+            go on long runs, listen to music, learn new technology, and tinker
+            with hardware & reparing circuit boards with my trusty iron.
+          </p>
+          <p>
+            And that&apos;s it for me. I&apos;m a simple person. I love my
+            friends. I love my family.
+          </p>
+          <p>
+            See some of my latest blog posts below, and check all of them out{" "}
+            <Link href="/blog" legacyBehavior>
+              <a>here</a>
+            </Link>
+            . Feel free to shoot me an email at bradleycaravana@gmail.com.
+            Thanks for stopping by.
+          </p>
+        </div>
+      </SectionAboutStyled>
       <SectionBlogPostStyled>
         <div className="blogSectionHeaderContainer">
-          <h2 className="header">Most Viewed Blog Posts</h2>
+          <h2 className="header">
+            Latest Blog <span className="hl">Posts</span>
+          </h2>
         </div>
         <div className="cardContainer">
           <PostCard />

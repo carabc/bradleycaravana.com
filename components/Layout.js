@@ -1,6 +1,7 @@
 import Head from "next/head";
 import MobileNagivation from "./MobileNavigation/MobileNavigation";
 import Navigation from "./Navigation/Navigation";
+import Footer from "./Footer/Footer";
 import styled from "styled-components";
 
 const ContentContainerDivStyled = styled.div`
@@ -23,7 +24,7 @@ export default function Layout({
         <meta name="keywords" content={keywords} />
         <meta name="description" content={description} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
       </Head>
       <ContentContainerDivStyled>
         <div className="navContainer">
@@ -31,6 +32,7 @@ export default function Layout({
         </div>
         <MobileNagivation />
         {children}
+        <Footer />
       </ContentContainerDivStyled>
     </>
   );

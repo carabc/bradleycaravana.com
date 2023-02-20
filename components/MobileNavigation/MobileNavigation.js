@@ -6,10 +6,13 @@ export default function MobileNagivation() {
   return (
     <>
       <div id="menu-wrap" className={`${isActive ? "close" : ""}`}>
-        <div class="burger-container" onClick={() => setIsActive(!isActive)}>
-          <div class="line-1 line"></div>
-          <div class="line-2 line"></div>
-          <div class="line-3 line"></div>
+        <div
+          className="burger-container"
+          onClick={() => setIsActive(!isActive)}
+        >
+          <div className="line-1 line"></div>
+          <div className="line-2 line"></div>
+          <div className="line-3 line"></div>
         </div>
 
         <div className={`menu ${isActive ? "visible" : ""}`}>
@@ -21,11 +24,7 @@ export default function MobileNagivation() {
                     <a>Home</a>
                   </Link>
                 </li>
-                <li className="list-item">
-                  <Link href="/about" legacyBehavior>
-                    <a>About</a>
-                  </Link>
-                </li>
+
                 <li className="list-item">
                   <Link href="/blog" legacyBehavior>
                     <a>Blog</a>
