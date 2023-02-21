@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Layout from "@/components/Layout";
 import styled from "styled-components";
 import { withTheme } from "styled-components";
@@ -5,6 +6,8 @@ import Image from "next/image";
 import headshot from "../public/images/headshot.png";
 import PostCard from "@/components/PostCard/PostCard";
 import Link from "next/link";
+import useStore from "@/src/store";
+import axios from "axios";
 
 const MainStyled = styled.main`
   display: flex;
@@ -68,32 +71,54 @@ const SectionAboutStyled = styled.section`
 
   h2 {
     text-align: center;
+    margin: 0;
   }
 
   .textContainer {
+    color: #fff;
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+
     p {
-      font-size: 0.85rem;
-    }
-  }
-
-  @media (min-width: ${({ theme }) => theme.lg}) {
-    width: 45%;
-
-    h2 {
-      text-align: initial;
+      width: 100%;
     }
   }
 
   @media (min-width: ${({ theme }) => theme.md}) {
+    width: 70%;
     .textContainer {
+      align-items: start;
       p {
-        font-size: 1rem;
+        font-size: 1em;
+        margin: 0.25em 0;
       }
 
       p a {
         color: ${({ theme }) => theme.dark.hl};
         text-decoration: none;
       }
+    }
+  }
+
+  @media (min-width: 1280px) and (max-width: 1650px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1651px) {
+    width: 30%;
+
+    .textContainer {
+      p {
+        font-size: 1rem;
+      }
+    }
+
+    h2 {
+      text-align: initial;
     }
   }
 `;
@@ -134,6 +159,25 @@ const SectionBlogPostStyled = styled.section`
 `;
 
 export default withTheme(function Home() {
+  const setRepos = useStore((state) => state.setRepos);
+  const repos = useStore((state) => state.repos);
+
+  useEffect(() => {
+    let fetchRepos = async () => {
+      let data = await axios.get(process.env.NEXT_PUBLIC_GITHUB_URL, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setRepos(data.data);
+    };
+
+    if (repos.length === 0) {
+      fetchRepos();
+      console.log("refetching repos...");
+    }
+  }, [setRepos, repos]);
+
   return (
     <Layout>
       <MainStyled>
