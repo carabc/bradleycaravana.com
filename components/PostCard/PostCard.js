@@ -40,6 +40,7 @@ const PostCardContainer = styled.div`
 
       .viewCount {
         display: flex;
+
         align-items: center;
         gap: 0.25em;
       }
@@ -56,8 +57,8 @@ export default withTheme(function PostCard() {
         </div>
 
         <div className="postFooter">
-          <p className="author">By: Bradley Caravana</p>
-          <p className="date">Date: 02-17-2023</p>
+          {/* <p className="author">By: Bradley Caravana</p> */}
+          <p className="date">02-17-2023</p>
           <p className="viewCount">
             <AiOutlineEye size={20} />
             100

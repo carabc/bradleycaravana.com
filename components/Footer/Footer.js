@@ -30,6 +30,12 @@ const DivStyled = styled.div`
         padding: 1.25em 1em;
         border-radius: 10px;
         width: 90%;
+        transition: all 0.1s ease-in-out;
+
+        &:hover {
+          color: ${({ theme }) => theme.dark.fg};
+          border-color: ${({ theme }) => theme.dark.fg};
+        }
 
         li {
           display: flex;

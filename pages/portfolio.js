@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import PostCard from "@/components/PostCard/PostCard";
 import styled from "styled-components";
 import useStore from "@/src/store";
+import RepoCard from "@/components/RepoCard/RepoCard";
 
 const MainStyled = styled.main`
   width: 90%;
@@ -82,7 +83,35 @@ const MainStyled = styled.main`
   }
 `;
 
-const SectionReposStyled = styled.section``;
+const SectionReposStyled = styled.section`
+  color: #fff;
+  width: 90%;
+  margin: 2em auto;
+
+  .headerContainer h1 {
+    text-align: center;
+    margin: 0;
+  }
+
+  @media (min-width: ${({ theme }) => theme.md}) {
+    width: 70%;
+    .headerContainer h1 {
+      text-align: initial;
+    }
+  }
+
+  @media (min-width: 880px) {
+    width: 70%;
+  }
+
+  @media (min-width: 1280px) and (max-width: 1650px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1651px) {
+    width: 30%;
+  }
+`;
 
 export default function Portfolio() {
   const repos = useStore((state) => state.repos);
@@ -130,11 +159,16 @@ export default function Portfolio() {
         </div>
       </MainStyled>
       <SectionReposStyled>
-        <h2>
-          GitHub <span className="hl">Repos</span>
-        </h2>
-        {repos.length !== 0 &&
-          repos.map((repo) => <p key={repo.id}>{repo.name}</p>)}
+        <div className="headerContainer">
+          <h1>
+            GitHub <span className="hl">Repos</span>
+          </h1>
+        </div>
+        <div className="repoContainer">
+          {/* <RepoCard /> */}
+          {repos.length > 0 &&
+            repos.map((repo) => <RepoCard key={repo.id} repo={repo} />)}
+        </div>
       </SectionReposStyled>
     </Layout>
   );
