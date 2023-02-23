@@ -100,7 +100,13 @@ const SectionSnippetsStyled = styled.section`
 
   @media (min-width: 440px) {
     .snippetContainer {
-      grid-template-columns: repeat(auto-fit, 10rem);
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 600px) {
+    .snippetContainer {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 

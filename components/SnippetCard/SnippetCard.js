@@ -12,7 +12,7 @@ const SnippetCardContainer = styled.div`
 
   &:hover {
     transform: scale(101%);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.1s ease-in-out;
     cursor: pointer;
   }
 
