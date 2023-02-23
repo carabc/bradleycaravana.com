@@ -100,7 +100,7 @@ const SectionSnippetsStyled = styled.section`
 
   @media (min-width: 440px) {
     .snippetContainer {
-      grid-template-columns: repeat(auto-fill, 10rem);
+      grid-template-columns: repeat(auto-fit, 10rem);
     }
   }
 
@@ -160,6 +160,10 @@ export default function Portfolio({ repos }) {
           </h1>
         </div>
         <div className="snippetContainer">
+          <SnippetCard title="Sort array of objects based on date" />
+          <SnippetCard title="Sort array of objects based on date" />
+          <SnippetCard title="Sort array of objects based on date" />
+          <SnippetCard title="Sort array of objects based on date" />
           <SnippetCard title="Sort array of objects based on date" />
         </div>
       </SectionSnippetsStyled>
