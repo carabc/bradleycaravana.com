@@ -3,6 +3,7 @@ import PostCard from "@/components/PostCard/PostCard";
 import styled from "styled-components";
 import useStore from "@/src/store";
 import RepoCard from "@/components/RepoCard/RepoCard";
+import SnippetCard from "@/components/SnippetCard/SnippetCard";
 
 const MainStyled = styled.main`
   width: 90%;
@@ -83,18 +84,29 @@ const MainStyled = styled.main`
   }
 `;
 
-const SectionReposStyled = styled.section`
+const SectionSnippetsStyled = styled.section`
   color: #fff;
   width: 90%;
   margin: 2em auto;
 
   .headerContainer h1 {
     text-align: center;
-    margin: 0;
+  }
+
+  .snippetContainer {
+    display: grid;
+    gap: 1em;
+  }
+
+  @media (min-width: 440px) {
+    .snippetContainer {
+      grid-template-columns: repeat(auto-fill, 10rem);
+    }
   }
 
   @media (min-width: ${({ theme }) => theme.md}) {
     width: 70%;
+
     .headerContainer h1 {
       text-align: initial;
     }
@@ -126,54 +138,44 @@ export default function Portfolio({ repos }) {
           </cite>
           <div className="subHeaderBlock">
             <p>
-              Alright, let&apos;s address the elephant in the room. I re-build
-              my website a lot. But that&apos;s for a couple of reasons.
+              I can&apos;t even begin to tell you how many times I&apos;ve been
+              developing, either by myself or at work with my co-workers, and I
+              say &quot;hold on, I&apos;ve done this before. Let me find it
+              somewhere!&quot; This page is that &quot;somewhere.&quot;
             </p>
             <p>
-              As I&apos;ve mentioned before, I love to build and learn. I come
-              across new technologies, and I say to myself &quot;I&apos;d love
-              to build my next website with this.&quot; It&apos;s a sickness,
-              really. But that&apos;s because I&apos;m never happy with what I
-              build, and I think a lot of other developers feel the same way.
-              We&apos;re always trying to improve and look for new things to
-              tinker with.
+              This is a collection of snippets that I use semi-regularly, but
+              can never remember off the top of my head. I have too much stuff
+              in there already! Remembering the code to establish a trusted SQL
+              connection in C# takes up way too much brain storage.
             </p>
-            <p>
-              This is why a lot of the repos I have on Github are old websites.
-              But there&apos;s a couple of funny party trick apps in there as
-              well. Most of my time is spent developing for work. Making more
-              projects to stick on GitHub is always a goal of mine I&apos;m
-              trying to reach. Feel free to download some of my projects and
-              take a look around.
-            </p>
+            <p>Feel free to stea-- uhm. I mean, &quot;borrow,&quot; any.</p>
           </div>
         </div>
       </MainStyled>
-      <SectionReposStyled>
+      <SectionSnippetsStyled>
         <div className="headerContainer">
           <h1>
-            GitHub <span className="hl">Repos</span>
+            Code <span className="hl">Snippets</span>
           </h1>
         </div>
-        <div className="repoContainer">
-          {/* <RepoCard /> */}
-          {repos.length > 0 &&
-            repos.map((repo) => <RepoCard key={repo.id} repo={repo} />)}
+        <div className="snippetContainer">
+          <SnippetCard title="Sort array of objects based on date" />
         </div>
-      </SectionReposStyled>
+      </SectionSnippetsStyled>
     </Layout>
   );
 }
 
-export async function getStaticProps() {
-  const res = await fetch(process.env.GITHUB_URL);
-  let data = await res.json();
-  data = JSON.stringify(data);
-  let repos = JSON.parse(data);
+// export async function getStaticProps() {
+//   const res = await fetch(process.env.GITHUB_URL);
+//   let data = await res.json();
+//   data = JSON.stringify(data);
+//   let repos = JSON.parse(data);
 
-  return {
-    props: {
-      repos: repos,
-    },
-  };
-}
+//   return {
+//     props: {
+//       repos: repos,
+//     },
+//   };
+// }

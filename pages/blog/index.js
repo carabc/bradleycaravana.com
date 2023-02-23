@@ -1,6 +1,10 @@
 import Layout from "@/components/Layout";
 import PostCard from "@/components/PostCard/PostCard";
+import { postNames, postsDir } from "@/utils/namesAndPaths";
 import styled from "styled-components";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
 const MainStyled = styled.main`
   width: 90%;
@@ -110,7 +114,8 @@ const SectionAllPosts = styled.section`
   }
 `;
 
-export default function Blog() {
+export default function Blog({ posts }) {
+  console.log(posts);
   return (
     <Layout title="Bradley Caravana | Blog">
       <MainStyled>
@@ -157,8 +162,31 @@ export default function Blog() {
         </div>
         <div className="postsContainer">
           <PostCard />
+          <PostCard />
         </div>
       </SectionAllPosts>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  // get the file names using fs.readdirSync, should return an array of filenames
+  // console.log("THE POSTS NAMES: ", postNames);
+  let posts = postNames.map((name) => {
+    let content = fs.readFileSync(path.join(postsDir, `${name}.mdx`));
+    // get the frontmatter from the content
+    const { data } = matter(content);
+    return {
+      frontmatter: data,
+      slug: name,
+    };
+  });
+
+  // serialize the frontmatter and the slug using JSON.parse(JSON.stringify(posts))
+
+  return {
+    props: {
+      posts: JSON.parse(JSON.stringify(posts)),
+    },
+  };
 }

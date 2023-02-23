@@ -1,13 +1,10 @@
 import { useEffect } from "react";
 import Layout from "@/components/Layout";
 import styled from "styled-components";
-import { withTheme } from "styled-components";
 import Image from "next/image";
 import headshot from "../public/images/headshot.png";
 import PostCard from "@/components/PostCard/PostCard";
 import Link from "next/link";
-import useStore from "@/src/store";
-import axios from "axios";
 
 const MainStyled = styled.main`
   display: flex;
@@ -158,26 +155,7 @@ const SectionBlogPostStyled = styled.section`
   }
 `;
 
-export default withTheme(function Home() {
-  const setRepos = useStore((state) => state.setRepos);
-  const repos = useStore((state) => state.repos);
-
-  useEffect(() => {
-    let fetchRepos = async () => {
-      let data = await axios.get(process.env.NEXT_PUBLIC_GITHUB_URL, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      setRepos(data.data);
-    };
-
-    if (repos.length === 0) {
-      fetchRepos();
-      console.log("refetching repos...");
-    }
-  }, [setRepos, repos]);
-
+export default function Home() {
   return (
     <Layout>
       <MainStyled>
@@ -258,4 +236,4 @@ export default withTheme(function Home() {
       </SectionBlogPostStyled>
     </Layout>
   );
-});
+}
