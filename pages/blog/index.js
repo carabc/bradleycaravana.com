@@ -115,7 +115,6 @@ const SectionAllPosts = styled.section`
 `;
 
 export default function Blog({ posts }) {
-  console.log(posts);
   return (
     <Layout title="Bradley Caravana | Blog">
       <MainStyled>
@@ -161,8 +160,9 @@ export default function Blog({ posts }) {
           </h1>
         </div>
         <div className="postsContainer">
-          <PostCard />
-          <PostCard />
+          {posts.map((post) => (
+            <PostCard key={post.slug} post={post} />
+          ))}
         </div>
       </SectionAllPosts>
     </Layout>
@@ -170,20 +170,22 @@ export default function Blog({ posts }) {
 }
 
 export async function getStaticProps() {
-  // get the file names using fs.readdirSync, should return an array of filenames
-  // console.log("THE POSTS NAMES: ", postNames);
+  // map through the post names
   let posts = postNames.map((name) => {
-    let content = fs.readFileSync(path.join(postsDir, `${name}.mdx`));
-    // get the frontmatter from the content
-    const { data } = matter(content);
+    // read the current file
+    let text = fs.readFileSync(path.join(postsDir, `${name}`));
+
+    // get the frontmatter and content from the text
+    const { data: frontmatter } = matter(text);
+    // get the slug
+    let slug = name.replace(".mdx", "");
+    // return the frontmatter and slug for each file
     return {
-      frontmatter: data,
-      slug: name,
+      frontmatter,
+      slug,
     };
   });
-
-  // serialize the frontmatter and the slug using JSON.parse(JSON.stringify(posts))
-
+  // return the array of objects, each object containing the file content and the frontmatter for a post, as props to the react component
   return {
     props: {
       posts: JSON.parse(JSON.stringify(posts)),

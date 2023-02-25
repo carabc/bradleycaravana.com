@@ -48,17 +48,17 @@ const PostCardContainer = styled.div`
   }
 `;
 
-export default withTheme(function PostCard() {
+export default withTheme(function PostCard({ post }) {
   return (
     <PostCardContainer>
       <div className="cardInner">
         <div className="postHeader">
-          <h3>This is the title of the post</h3>
+          <h3>{post?.frontmatter.title}</h3>
         </div>
 
         <div className="postFooter">
           {/* <p className="author">By: Bradley Caravana</p> */}
-          <p className="date">02-17-2023</p>
+          <p className="date">{post?.frontmatter.date}</p>
           <p className="viewCount">
             <AiOutlineEye size={20} />
             100

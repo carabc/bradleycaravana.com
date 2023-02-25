@@ -87,6 +87,9 @@ const SectionAboutStyled = styled.section`
 
   @media (min-width: ${({ theme }) => theme.md}) {
     width: 70%;
+    h2 {
+      text-align: initial;
+    }
     .textContainer {
       align-items: start;
       p {
@@ -113,10 +116,6 @@ const SectionAboutStyled = styled.section`
         font-size: 1rem;
       }
     }
-
-    h2 {
-      text-align: initial;
-    }
   }
 `;
 
@@ -130,28 +129,38 @@ const SectionBlogPostStyled = styled.section`
   }
 
   .cardContainer {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+
     gap: 1em;
   }
 
-  @media (min-width: ${({ theme }) => theme.md}) {
+  @media (min-width: 440px) {
     .cardContainer {
-      flex-direction: row;
-      justify-content: center;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.md}) {
+    width: 70%;
+
+    .header {
+      text-align: initial;
+    }
+    .cardContainer {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
   @media (min-width: ${({ theme }) => theme.lg}) {
     margin: 2em auto 0 auto;
+  }
 
-    .header {
-      text-align: initial;
-    }
-    .blogSectionHeaderContainer {
-      width: 50%;
-      margin: 0 auto;
-    }
+  @media (min-width: 1280px) and (max-width: 1650px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1651px) {
+    width: 30%;
   }
 `;
 
@@ -237,3 +246,38 @@ export default function Home() {
     </Layout>
   );
 }
+
+// const SectionBlogPostStyled = styled.section`
+//   width: 90%;
+//   margin: 1em auto 0 auto;
+
+//   .header {
+//     color: #fff;
+//     text-align: center;
+//   }
+
+//   .cardContainer {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1em;
+//   }
+
+//   @media (min-width: ${({ theme }) => theme.md}) {
+//     .cardContainer {
+//       flex-direction: row;
+//       justify-content: center;
+//     }
+//   }
+
+//   @media (min-width: ${({ theme }) => theme.lg}) {
+//     margin: 2em auto 0 auto;
+
+//     .header {
+//       text-align: initial;
+//     }
+//     .blogSectionHeaderContainer {
+//       width: 50%;
+//       margin: 0 auto;
+//     }
+//   }
+// `;
