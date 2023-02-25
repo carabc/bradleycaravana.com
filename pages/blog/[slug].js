@@ -152,11 +152,13 @@ export async function getStaticPaths() {
   // NextJS needs all the slugs to render this page at build time
   // return an array of objects structured like this:
   /*
-    paths: {
-      params: {
-        slug: post-one
+    paths: [
+      {
+        params: {
+          slug: post-one
+        }
       }
-    }
+    ]
   */
   // map through the post names
   const paths = postNames.map((name) => {
