@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { withTheme } from "styled-components";
 import { AiOutlineEye } from "react-icons/ai";
+import Link from "next/link";
 
 const SnippetCardContainer = styled.div`
   padding: 0.2em;
@@ -14,6 +15,11 @@ const SnippetCardContainer = styled.div`
     transform: scale(101%);
     transition: all 0.1s ease-in-out;
     cursor: pointer;
+  }
+
+  .link {
+    text-decoration: none;
+    color: #fff;
   }
 
   .snippetInner {
@@ -91,9 +97,19 @@ const SnippetCardContainer = styled.div`
     background: #026e00;
     color: $fff;
   }
+
+  @media (min-width: 768px) {
+    .snippetInner {
+      .snippetHeader {
+        h3 {
+          font-size: 1em;
+        }
+      }
+    }
+  }
 `;
 
-export default withTheme(function PostCard({ title }) {
+export default withTheme(function SnippetCard({ snippet }) {
   let getClassName = (language) => {
     switch (language) {
       case "JavaScript":
@@ -118,18 +134,24 @@ export default withTheme(function PostCard({ title }) {
         return "";
     }
   };
+
+  console.log("THE TAG: ", snippet.frontmatter.tag);
   return (
     <SnippetCardContainer>
-      <div className="snippetInner">
-        <div className="snippetHeader">
-          <h3>{title}</h3>
+      <Link href={`/snippets/${snippet.slug}`} className="link">
+        <div className="snippetInner">
+          <div className="snippetHeader">
+            <h3>{snippet?.frontmatter.title}</h3>
+          </div>
+          <div className="postFooter">
+            <span
+              className={`language ${getClassName(snippet.frontmatter.tag)}`}
+            >
+              {snippet.frontmatter.tag}
+            </span>
+          </div>
         </div>
-        <div className="postFooter">
-          <span className={`language ${getClassName("JavaScript")}`}>
-            JavaScript
-          </span>
-        </div>
-      </div>
+      </Link>
     </SnippetCardContainer>
   );
 });

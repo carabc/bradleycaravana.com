@@ -1,12 +1,17 @@
+import { useEffect } from "react";
 import fs from "fs";
 import path from "path";
-import { postNames, postsDir } from "@/utils/namesAndPaths";
+import { postNames, postsDir } from "@/lib/namesAndPaths";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import styled from "styled-components";
 import Layout from "@/components/Layout";
-
+import { useSWRConfig } from "swr";
+import useSWR from "swr";
+import fetcher from "@/lib/fetcher";
+import Link from "next/link";
+import Test from "@/components/Test";
 const MainStyled = styled.main`
   width: 90%;
   margin: 0 auto;
@@ -16,12 +21,14 @@ const MainStyled = styled.main`
   }
 
   .headerTitles h1,
-  .headerTitles cite {
+  .headerTitles cite,
+  .headerTitles .backBtn {
     text-align: center;
   }
 
   .headerTitles {
     color: #fff;
+
     h1 {
       margin: 0 0 0 0;
       font-size: 2em;
@@ -115,7 +122,36 @@ const SectionPost = styled.section`
   }
 `;
 
+let components = { Test };
+
 export default function Post({ frontmatter, mdxSource, slug }) {
+  const { data, error, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_VIEW_ROUTE}/${slug}`,
+    fetcher,
+  );
+  const { mutate } = useSWRConfig();
+
+  useEffect(() => {
+    let canPost = true;
+    const postRequest = async () => {
+      await fetch(`${process.env.NEXT_PUBLIC_VIEW_ROUTE}/${slug}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(slug),
+      });
+      mutate(`${process.env.NEXT_PUBLIC_VIEW_ROUTE}/${slug}`, {
+        revalidate: true,
+        populateCache: true,
+      });
+    };
+    if (canPost) postRequest();
+    return () => {
+      canPost = false;
+    };
+  }, []);
+
   return (
     <Layout title="Bradley Caravana | Blog">
       <MainStyled>
@@ -132,13 +168,8 @@ export default function Post({ frontmatter, mdxSource, slug }) {
         <div className="headerContainer">
           <h1>{frontmatter.title}</h1>
         </div>
-        <div className="metaData">
-          {/* <p>By {frontmatter.author}</p>
-          <p>Published on: {frontmatter.date}</p>
-          <p>Tags: {frontmatter.tags.join(", ")}</p> */}
-        </div>
         <div className="postsContainer">
-          <MDXRemote {...mdxSource} />
+          <MDXRemote {...mdxSource} components={components} />
         </div>
       </SectionPost>
     </Layout>

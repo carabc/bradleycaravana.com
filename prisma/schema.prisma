@@ -9,6 +9,6 @@ datasource db {
 
 model tblViews {
   ID    Int     @id @default(autoincrement())
-  slug  String? @db.VarChar(255)
-  views Int?
+  slug  String? @unique(map: "slug") @db.VarChar(255)
+  views Int?    @default(0)
 }

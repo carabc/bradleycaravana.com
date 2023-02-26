@@ -5,6 +5,14 @@ import Image from "next/image";
 import headshot from "../public/images/headshot.png";
 import PostCard from "@/components/PostCard/PostCard";
 import Link from "next/link";
+import { postNames } from "@/lib/namesAndPaths";
+import { postsDir } from "@/lib/namesAndPaths";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { BsSpotify } from "react-icons/bs";
+import spottyFetcher from "@/lib/spottyFetcher";
+import useSWR from "swr";
 
 const MainStyled = styled.main`
   display: flex;
@@ -164,7 +172,19 @@ const SectionBlogPostStyled = styled.section`
   }
 `;
 
-export default function Home() {
+const SectionCurrentlyPlaying = styled.section`
+  width: 90%;
+  margin: 1em auto 0 auto;
+`;
+
+export default function Home({ posts }) {
+  const {
+    data: spottyData,
+    error,
+    isLoading,
+  } = useSWR("/api/spotify", spottyFetcher);
+  console.log(spottyData);
+  console.log(error);
   return (
     <Layout>
       <MainStyled>
@@ -238,46 +258,49 @@ export default function Home() {
           </h2>
         </div>
         <div className="cardContainer">
-          <PostCard />
-          <PostCard />
-          <PostCard />
+          {posts.map((post) => (
+            <PostCard key={post.slug} post={post} />
+          ))}
         </div>
       </SectionBlogPostStyled>
+      <SectionCurrentlyPlaying>
+        <div className="spottyContainer">
+          <p>
+            <BsSpotify size={30} />
+          </p>
+          <p>
+            {spottyData?.isPlaying
+              ? `Currently Listening to ${spottyData?.songName} by
+            ${spottyData?.allArtists}`
+              : "Not Playing"}
+          </p>
+        </div>
+      </SectionCurrentlyPlaying>
     </Layout>
   );
 }
 
-// const SectionBlogPostStyled = styled.section`
-//   width: 90%;
-//   margin: 1em auto 0 auto;
+export async function getStaticProps() {
+  // need to get the frontmatter for the most recent 3 posts
+  const posts = postNames
+    .map((name) => {
+      let text = fs.readFileSync(path.join(postsDir, `${name}`));
+      let { data: frontmatter } = matter(text);
+      let slug = name.replace(".mdx", "");
 
-//   .header {
-//     color: #fff;
-//     text-align: center;
-//   }
+      return {
+        frontmatter,
+        slug,
+      };
+    })
+    .sort((a, b) => {
+      return new Date(b.frontmatter.date) - new Date(a.frontmatter.date);
+    })
+    .slice(0, 3);
 
-//   .cardContainer {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 1em;
-//   }
-
-//   @media (min-width: ${({ theme }) => theme.md}) {
-//     .cardContainer {
-//       flex-direction: row;
-//       justify-content: center;
-//     }
-//   }
-
-//   @media (min-width: ${({ theme }) => theme.lg}) {
-//     margin: 2em auto 0 auto;
-
-//     .header {
-//       text-align: initial;
-//     }
-//     .blogSectionHeaderContainer {
-//       width: 50%;
-//       margin: 0 auto;
-//     }
-//   }
-// `;
+  return {
+    props: {
+      posts,
+    },
+  };
+}

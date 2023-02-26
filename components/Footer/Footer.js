@@ -42,6 +42,14 @@ const DivStyled = styled.div`
           justify-content: space-between;
           align-items: center;
 
+          .spotify {
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1em;
+          }
+
           .iconAndText {
             display: flex;
             align-items: center;

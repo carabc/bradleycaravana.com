@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import PostCard from "@/components/PostCard/PostCard";
-import { postNames, postsDir } from "@/utils/namesAndPaths";
+import { postNames, postsDir } from "@/lib/namesAndPaths";
 import styled from "styled-components";
 import fs from "fs";
 import path from "path";
@@ -171,20 +171,25 @@ export default function Blog({ posts }) {
 
 export async function getStaticProps() {
   // map through the post names
-  let posts = postNames.map((name) => {
-    // read the current file
-    let text = fs.readFileSync(path.join(postsDir, `${name}`));
+  let posts = postNames
+    .map((name) => {
+      // read the current file
+      let text = fs.readFileSync(path.join(postsDir, `${name}`));
 
-    // get the frontmatter and content from the text
-    const { data: frontmatter } = matter(text);
-    // get the slug
-    let slug = name.replace(".mdx", "");
-    // return the frontmatter and slug for each file
-    return {
-      frontmatter,
-      slug,
-    };
-  });
+      // get the frontmatter and content from the text
+      const { data: frontmatter } = matter(text);
+      // get the slug
+      let slug = name.replace(".mdx", "");
+      // return the frontmatter and slug for each file
+      return {
+        frontmatter,
+        slug,
+      };
+    })
+    .sort((a, b) => {
+      return new Date(b.frontmatter.date) - new Date(a.frontmatter.date);
+    });
+
   // return the array of objects, each object containing the file content and the frontmatter for a post, as props to the react component
   return {
     props: {

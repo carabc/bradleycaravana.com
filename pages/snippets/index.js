@@ -4,6 +4,10 @@ import styled from "styled-components";
 import useStore from "@/src/store";
 import RepoCard from "@/components/RepoCard/RepoCard";
 import SnippetCard from "@/components/SnippetCard/SnippetCard";
+import { snippetsNames, snippetsDir } from "@/lib/namesAndPaths";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
 const MainStyled = styled.main`
   width: 90%;
@@ -131,7 +135,8 @@ const SectionSnippetsStyled = styled.section`
   }
 `;
 
-export default function Portfolio({ repos }) {
+export default function Snippets({ snippets }) {
+  console.log(snippets);
   return (
     <Layout title="Bradley Caravana | Blog">
       <MainStyled>
@@ -166,26 +171,45 @@ export default function Portfolio({ repos }) {
           </h1>
         </div>
         <div className="snippetContainer">
+          {/* <SnippetCard title="Sort array of objects based on date" />
           <SnippetCard title="Sort array of objects based on date" />
           <SnippetCard title="Sort array of objects based on date" />
           <SnippetCard title="Sort array of objects based on date" />
-          <SnippetCard title="Sort array of objects based on date" />
-          <SnippetCard title="Sort array of objects based on date" />
+          <SnippetCard title="Sort array of objects based on date" /> */}
+          {snippets.map((snippet) => (
+            <SnippetCard key={snippet.slug} snippet={snippet} />
+          ))}
         </div>
       </SectionSnippetsStyled>
     </Layout>
   );
 }
 
-// export async function getStaticProps() {
-//   const res = await fetch(process.env.GITHUB_URL);
-//   let data = await res.json();
-//   data = JSON.stringify(data);
-//   let repos = JSON.parse(data);
+export async function getStaticProps() {
+  // map through the post names
+  let snippets = snippetsNames
+    .map((name) => {
+      // read the current file
+      let text = fs.readFileSync(path.join(snippetsDir, `${name}`));
 
-//   return {
-//     props: {
-//       repos: repos,
-//     },
-//   };
-// }
+      // get the frontmatter and content from the text
+      const { data: frontmatter } = matter(text);
+      // get the slug
+      let slug = name.replace(".mdx", "");
+      // return the frontmatter and slug for each file
+      return {
+        frontmatter,
+        slug,
+      };
+    })
+    .sort((a, b) => {
+      return new Date(b.frontmatter.date) - new Date(a.frontmatter.date);
+    });
+
+  // return the array of objects, each object containing the file content and the frontmatter for a post, as props to the react component
+  return {
+    props: {
+      snippets: JSON.parse(JSON.stringify(snippets)),
+    },
+  };
+}

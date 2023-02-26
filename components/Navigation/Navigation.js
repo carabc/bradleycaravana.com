@@ -55,7 +55,9 @@ export default function Navigation() {
 
         <li>
           <Link href="/blog" legacyBehavior>
-            <a aria-current={router.pathname === "/blog" && "page"}>Blog</a>
+            <a aria-current={router.pathname.includes("/blog") && "page"}>
+              Blog
+            </a>
           </Link>
         </li>
         <li>
