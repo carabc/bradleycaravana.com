@@ -1,0 +1,35 @@
+---
+title: Touring My New NextJS Site
+author: Bradley Caravana
+date: 02/23/2023
+tags: [JavaScript, NextJS, Prisma, Styled-Components, PlanetScale]
+description: Learn how to connect Spotify to your app and show your currently playing track.
+---
+
+So, I feel like I have to explain myself to the one person who read my original blog. I didn't stick to writing posts very often. In fact, the last time I wrote one was probably in the Fall of 2020. Since then, I graduated college with honors and got a Full Stack developer job. Cool!
+
+But the blog was still forgotten, and that was definitely something that I _knew_ would happen, but didn't _want_ to happen. And I loved that website! I credit it as my dive into full stack development, and I put so much work into it over a couple months, learning as I went along. I was so excited when it was finished, but it still had its flaws that in hindsight, just have me asking myself 'Why in the world did I even include this.' Seeing as I re-build my site every couple years with new technology I've learned, I figured now would be a good time to get back to it.
+
+<HeadingThreeWithHighlight header={"The Stack"} />
+
+This bad boy is running NextJS, its own built in API routing to handle requests, PlanetScale for data storage, Prisma as the ORM, Styled Components, and MDX for the blog posts & snippets. I went with a Markdown based blog again because of its ease of use. It's so simple to just pop open a file and get to writing, no need to scaffold out a new React page with custom styles or anything like that. But the **beauty** of MDX is that if I still want to use a custom React Component, I can!
+
+Previously, I built my portfolio using the Handlebars templating engine with a custom Express API to handle requests and serve files. I used MongoDB as my database of choice and used Mongoose as the ORM.
+
+<HeadingThreeWithHighlight header={"New Additions"} />
+
+Stack aside, I also wanted to create a 'Snippets' page. I store all of my snippets in a giant Obsidian document, and I feel like having them stored on the site instead will be a better place for them. Anyone can come and grab a nifty piece of code to use for themselves. These snippets are also written in MDX with the rehypeHighlight MDX plugin.
+
+<HeadingThreeWithHighlight header={"Features I Left Behind"} />
+
+There's no authentication on this site. The only reason why I added it last time was so users could 'like' posts and also leave comments on them, but I never finished the comment feature to begin with. So I decided to not make things harder than they need to be, why write auth for a blog? If I wanted to implement a 'like' feature, I could still code that in the future without auth.
+
+Despite that, I'm very happy I wrote it a couple years ago. It taught me a lot about JWT at the time and how tokens & sessions work. I'm still very proud of that piece!
+
+The contact form is also gone. I never got anything from it to begin with (didn't expect to), and if people want to contact me, the footer has some pretty good sites to reach me on.
+
+---
+
+And that's it. I don't want this to be too long winded. Thank's for taking the time to read if you did, and for stumbling on this site to begin with. Unless I sent it directly to you and forced you to check it out. Because I will with a few people. Sorry friends and family!
+
+-- _Bradley_

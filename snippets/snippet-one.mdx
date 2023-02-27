@@ -1,0 +1,99 @@
+---
+title: Spotify API
+author: Bradley Caravana
+description: Use these snippets to display your currently playing track through the Spotify API.
+date: 02/26/2023
+tag: JavaScript
+---
+
+Use these snippets to display your currently playing track through the Spotify API. Steps outlined below!
+
+<HeadingThreeWithHighlight header={"Required Steps"} />
+
+1. Setup Spotify project on Spotify Developer Dashboard
+2. Acquire your Client ID and Client Secret (click show secret)
+3. Add a callback url by clicking "Edit Settings" and adding http://localhost:8888/callback
+4. Acquire authorization code from Spotify
+5. Use this authorization code to fetch a Refresh Token from Spotify
+6. Save this Refresh Token in a very secure spot and use it to fetch a new Access Token when they expire
+7. Fetch Currently Playing Track from Spotify API
+
+<HeadingThreeWithHighlight
+  header={"Getting Spotify Authorization Code URL Parameter"}
+/>
+This is where it gets a little weird. You dont want to code a button on your website
+that you have to click, and then sign-in with Spotify every time you want to display
+your currently playing track. So you have to manually create A URL and paste it into
+your browser in order for Spotify to give you an authorization code as a URL parameter.
+This will then allow you to retrieve a refresh token needed to display the currently
+playing track. The URL has a couple of query parameters:
+
+- client_id=yourClientID
+- response_type=code
+- redirect_uri=yourRedirectURI (this must be url encoded, I used JavaScript to do this)
+- scope=user-read-currently-playing
+
+E.x.,
+
+```bash
+https://accounts.spotify.com/authorize?client_id
+=yourClientID&response_type=code&redirect_uri=your
+RedirectURI&scope=user-read-currently-playing
+```
+
+Notice how in the URL, we stated that the response_type (coming from Spotify) will be 'code.' This is our authorization code that we need later. Paste this URL into your browser. Depending on whether or not you have a local server running on port 8888, the request will hang and then eventually fail. That's fine, the authorization code will still be placed in the URL when it's done hanging. Save this code for the next step!
+
+Next, you want to use the 'curl' command in your terminal to hit another endpoint with some data inside of it. This data will be:
+
+- client_id:client_secret (these two must be base64 url encoded, again you can do this with JavaScript)
+- grant_type=authorization_code
+- code=yourAuthorizationCode
+- redirect_uri=yourRedirectURI
+- endpoint
+
+E.x.,
+
+```bash
+curl -H "Authorization: Basic yourBase64Encoded
+ClientIDAndClientSecret" -d grant_type=authorization_code
+-d code=yourAuthorizationCode -d redirect_uri=yourURLEncoded
+RedirectURI https://accounts.spotify.com/api/token
+```
+
+Spotify will give you a JSON response with your refresh_token which you will then guard with your life and never give out to another soul. This refresh token will last indefintely, as long as you don't revoke access. This token will allow you to generate a brand new access token when they expire.
+
+This is what my code looks like in order to fetch an access token and track data using the refresh token when the access token expires.
+
+```JavaScript
+const fetchAccessToken = async (refreshToken, clientID, clientSecret) => {
+  let basic = Buffer.from(`${clientID}:${clientSecret}`).toString("base64");
+  const paramString = `grant_type=refresh_token&refresh_token=${refreshToken}`;
+  const searchParams = new URLSearchParams(paramString);
+  let res = await fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${basic}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: searchParams,
+  });
+
+  return res.json();
+};
+
+export const getNowPlaying = async (refreshToken, clientID, clientSecret) => {
+  let { access_token } = await fetchAccessToken(
+    refreshToken,
+    clientID,
+    clientSecret,
+  );
+
+  return fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+};
+```
+
+The return value of getNowPlaying() will be a promise that you have to await, which will contain information about the track you're currently listening to. Do with that whatever you wish!
