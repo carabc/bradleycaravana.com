@@ -58,12 +58,6 @@ export default async function handler(req, res) {
       return res.status(200).send("ok");
     }
   } catch (error) {
-    console.log(error);
-    console.log("IN THE CATCH");
-    console.log("IN THE CATCH");
-    console.log("IN THE CATCH");
-    console.log("IN THE CATCH");
-    console.log("IN THE CATCH");
     return res.status(500).send(error);
   }
 }

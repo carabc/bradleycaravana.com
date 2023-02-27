@@ -23,6 +23,13 @@ export default function Layout({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="keywords" content={keywords} />
         <meta name="description" content={description} />
+        <meta
+          property="og:image"
+          content="https://bradleycaravana.com/og/png"
+        />
+        <meta property="og:title" content={title} key="ogtitle" />
+        <meta propery="og:site_name" content={title} key="ogsitename" />
+        <meta property="og:description" content={description} key="ogdesc" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
       </Head>

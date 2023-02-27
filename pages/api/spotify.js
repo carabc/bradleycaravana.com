@@ -30,8 +30,6 @@ export default async function spotify(req, res) {
       songUrl,
     });
   } catch (error) {
-    console.log(error);
-    console.log("IN THE CATCH");
     return res.status(500).send(error);
   }
 }

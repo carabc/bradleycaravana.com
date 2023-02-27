@@ -47,8 +47,6 @@ const PostCardContainer = styled.div`
 `;
 
 export default function PostCard({ post, showDesc }) {
-  console.log(post);
-  console.log(post?.frontmatter.description);
   return (
     <PostCardContainer>
       <Link href={`/blog/${post?.slug}`} className="link">

@@ -1,8 +1,6 @@
 import Layout from "@/components/Layout";
 import PostCard from "@/components/PostCard/PostCard";
 import styled from "styled-components";
-import useStore from "@/src/store";
-import RepoCard from "@/components/RepoCard/RepoCard";
 import SnippetCard from "@/components/SnippetCard/SnippetCard";
 import { snippetsNames, snippetsDir } from "@/lib/namesAndPaths";
 import fs from "fs";
@@ -136,7 +134,6 @@ const SectionSnippetsStyled = styled.section`
 `;
 
 export default function Snippets({ snippets }) {
-  console.log(snippets);
   return (
     <Layout title="Bradley Caravana | Blog">
       <MainStyled>

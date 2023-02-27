@@ -1,7 +1,6 @@
 import Layout from "@/components/Layout";
 import PostCard from "@/components/PostCard/PostCard";
 import styled from "styled-components";
-import useStore from "@/src/store";
 import RepoCard from "@/components/RepoCard/RepoCard";
 
 const MainStyled = styled.main`

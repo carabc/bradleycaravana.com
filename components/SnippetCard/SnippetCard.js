@@ -135,7 +135,6 @@ export default withTheme(function SnippetCard({ snippet }) {
     }
   };
 
-  console.log("THE TAG: ", snippet.frontmatter.tag);
   return (
     <SnippetCardContainer>
       <Link href={`/snippets/${snippet.slug}`} className="link">
