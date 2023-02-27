@@ -2,7 +2,11 @@ import { getNowPlaying } from "@/lib/spotty";
 
 export default async function spotify(req, res) {
   try {
-    const response = await getNowPlaying(process.env.SPOTIFY_REFRESH_TOKEN);
+    const response = await getNowPlaying(
+      process.env.SPOTIFY_REFRESH_TOKEN,
+      process.env.SPOTIFY_CLIENT_ID,
+      process.env.SPOTIFY_CLIENT_SECRET,
+    );
 
     if (response.status === 204 || response.status > 400) {
       console.log("Not listening to anything, or not connected to Spotify.");

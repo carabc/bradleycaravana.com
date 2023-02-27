@@ -27,9 +27,8 @@ export default function Layout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
       </Head>
       <ContentContainerDivStyled>
-        <div className="navContainer">
-          <Navigation />
-        </div>
+        <div className="navContainer"></div>
+        <Navigation />
         <MobileNagivation />
         {children}
         <Footer />

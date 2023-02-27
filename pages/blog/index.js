@@ -128,27 +128,16 @@ export default function Blog({ posts }) {
           <div className="subHeaderBlock">
             <p>This is not another developer blog.</p>
             <p>
-              I started my first blog back in the summer of 2020 when I really
-              hit the ground running with being a developer. I dove head-first
-              into front-end frameworks and templating engines (such as
-              handlebars, which is what my original blog was rendered in),
-              back-end APIs, NodeJS, Express, and ORMs such as Mongoose.
+              I&apos;ll be posting about anything and everything, not just code
+              (I hope).I started my first blog back in the summer of 2020 when I
+              really hit the ground running with being a developer. I dove
+              head-first into front-end frameworks, templating engines, APIs,
+              NodeJS, Express, and ORMs.
             </p>
             <p>
-              I severely limited myself to only posting about programming
-              related topics, which is why I think I never stuck with it.
-              Furthermore, the workflow of creating a new post was cumbersome.
-              In order to combat both of these obstacles, I&apos;ll be writing
-              about whatever it is I feel like writing about. Whether that be
-              any of my hobbies (programming include) or anything happening in
-              my life. I&apos;ll also be sticking to adding files manually and
-              pushing to my code repository, rather than creating pages to add
-              and edit posts.
-            </p>
-            <p>
-              Why not just get a journal? Because this also gives me an excuse
-              to build something that will benefit me in more ways than one. I
-              love learning how to build new things.
+              This website/blog gives me an excuse to build something that will
+              benefit me in more ways than one. I love learning how to build new
+              things.
             </p>
           </div>
         </div>

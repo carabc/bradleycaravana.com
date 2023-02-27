@@ -10,9 +10,6 @@ import { postsDir } from "@/lib/namesAndPaths";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { BsSpotify } from "react-icons/bs";
-import spottyFetcher from "@/lib/spottyFetcher";
-import useSWR from "swr";
 
 const MainStyled = styled.main`
   display: flex;
@@ -47,6 +44,10 @@ const MainStyled = styled.main`
 
   .imageContainer {
     order: 1;
+
+    .img {
+      user-select: none;
+    }
   }
 
   @media (min-width: ${({ theme }) => theme.md}) {
@@ -172,19 +173,7 @@ const SectionBlogPostStyled = styled.section`
   }
 `;
 
-const SectionCurrentlyPlaying = styled.section`
-  width: 90%;
-  margin: 1em auto 0 auto;
-`;
-
 export default function Home({ posts }) {
-  const {
-    data: spottyData,
-    error,
-    isLoading,
-  } = useSWR("/api/spotify", spottyFetcher);
-  console.log(spottyData);
-  console.log(error);
   return (
     <Layout>
       <MainStyled>
@@ -207,6 +196,7 @@ export default function Home({ posts }) {
             width={250}
             height={250}
             alt="Photo of Bradley Caravana"
+            className="img"
           />
         </div>
       </MainStyled>
@@ -219,7 +209,7 @@ export default function Home({ posts }) {
             Hey, my name is Bradley Caravana. But you probably knew that already
             based on the domain and the gigantic text at the top. I&apos;m a
             Full Stack Developer at Maxim Group LLC. programming in C#,
-            Javascript, SQL, NodeJS, Express, and React.
+            JavaScript, SQL, NodeJS, Express, and React.
           </p>
           <p>
             I work in a team of like minded programmers who are always looking
@@ -263,19 +253,6 @@ export default function Home({ posts }) {
           ))}
         </div>
       </SectionBlogPostStyled>
-      <SectionCurrentlyPlaying>
-        <div className="spottyContainer">
-          <p>
-            <BsSpotify size={30} />
-          </p>
-          <p>
-            {spottyData?.isPlaying
-              ? `Currently Listening to ${spottyData?.songName} by
-            ${spottyData?.allArtists}`
-              : "Not Playing"}
-          </p>
-        </div>
-      </SectionCurrentlyPlaying>
     </Layout>
   );
 }

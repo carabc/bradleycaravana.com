@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 const NavStyled = styled.nav`
   color: #fff;
@@ -43,38 +43,39 @@ const NavStyled = styled.nav`
 `;
 
 export default function Navigation() {
-  const router = useRouter();
-  return (
-    <NavStyled>
-      <ul>
-        <li>
-          <Link href="/" legacyBehavior>
-            <a aria-current={router.pathname === "/" && "page"}>Home</a>
-          </Link>
-        </li>
+  const pathName = usePathname();
 
-        <li>
-          <Link href="/blog" legacyBehavior>
-            <a aria-current={router.pathname.includes("/blog") && "page"}>
-              Blog
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/portfolio" legacyBehavior>
-            <a aria-current={router.pathname === "/portfolio" && "page"}>
-              Portfolio
-            </a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/snippets" legacyBehavior>
-            <a aria-current={router.pathname === "/snippets" && "page"}>
-              Snippets
-            </a>
-          </Link>
-        </li>
-      </ul>
-    </NavStyled>
+  return (
+    <>
+      <NavStyled>
+        <ul>
+          <li>
+            <Link href="/" legacyBehavior>
+              <a aria-current={pathName === "/" && "page"}>Home</a>
+            </Link>
+          </li>
+
+          <li>
+            <Link href="/blog" legacyBehavior>
+              <a aria-current={pathName.includes("/blog") && "page"}>Blog</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/portfolio" legacyBehavior>
+              <a aria-current={pathName === "/portfolio" && "page"}>
+                Portfolio
+              </a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/snippets" legacyBehavior>
+              <a aria-current={pathName.includes("/snippets") && "page"}>
+                Snippets
+              </a>
+            </Link>
+          </li>
+        </ul>
+      </NavStyled>
+    </>
   );
 }

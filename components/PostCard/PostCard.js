@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { withTheme } from "styled-components";
 import ViewCounter from "../ViewCounter/ViewCounter";
 import Link from "next/link";
 const PostCardContainer = styled.div`
@@ -27,7 +26,8 @@ const PostCardContainer = styled.div`
     padding: 1.25em;
     display: flex;
     flex-direction: column;
-    gap: 2em;
+    gap: 0.5em;
+    height: 100%;
 
     .postHeader {
       h3 {
@@ -46,7 +46,9 @@ const PostCardContainer = styled.div`
   }
 `;
 
-export default function PostCard({ post }) {
+export default function PostCard({ post, showDesc }) {
+  console.log(post);
+  console.log(post?.frontmatter.description);
   return (
     <PostCardContainer>
       <Link href={`/blog/${post?.slug}`} className="link">
@@ -54,6 +56,11 @@ export default function PostCard({ post }) {
           <div className="postHeader">
             <h3>{post?.frontmatter.title}</h3>
           </div>
+          {showDesc && (
+            <div className="postBody">
+              <p>{post.frontmatter.description}</p>
+            </div>
+          )}
 
           <div className="postFooter">
             <p className="date">{post?.frontmatter.date}</p>
@@ -64,3 +71,7 @@ export default function PostCard({ post }) {
     </PostCardContainer>
   );
 }
+
+PostCard.defaultProps = {
+  showDesc: false,
+};

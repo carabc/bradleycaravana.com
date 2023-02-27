@@ -5,10 +5,28 @@ import {
   AiOutlineGithub,
 } from "react-icons/ai";
 import { FiArrowUpRight } from "react-icons/fi";
+import { BsSpotify } from "react-icons/bs";
+import useSWR from "swr";
+import fetcher from "@/lib/fetcher";
 
-const DivStyled = styled.div`
-  width: 100%;
-  margin: 4em 0 0 0;
+const FooterDivStyled = styled.div`
+  width: 90%;
+  margin: 4em auto 0 auto;
+
+  .spottyContainer {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    width: 100%;
+    .text {
+      color: #fff;
+      font-size: 0.8em;
+    }
+    .icon {
+      color: ${({ theme }) => theme.dark.hl};
+    }
+  }
 
   .linkContainer {
     width: 100%;
@@ -29,7 +47,7 @@ const DivStyled = styled.div`
         border: 1px solid ${({ theme }) => theme.dark.border};
         padding: 1.25em 1em;
         border-radius: 10px;
-        width: 90%;
+        width: 100%;
         transition: all 0.1s ease-in-out;
 
         &:hover {
@@ -70,6 +88,12 @@ const DivStyled = styled.div`
   @media (min-width: ${({ theme }) => theme.md}) {
     width: 70%;
     margin: 4em auto 0 auto;
+
+    .spottyContainer {
+      .text {
+        font-size: 0.9em;
+      }
+    }
     .linkContainer {
       ul {
         flex-direction: row;
@@ -80,6 +104,12 @@ const DivStyled = styled.div`
   @media (min-width: ${({ theme }) => theme.lg}) {
     width: 30%;
     margin: 4em auto 0 auto;
+
+    .spottyContainer {
+      .text {
+        font-size: 1rem;
+      }
+    }
     .linkContainer {
       ul {
         flex-direction: row;
@@ -89,8 +119,24 @@ const DivStyled = styled.div`
 `;
 
 export default function Footer() {
+  const {
+    data: spottyData,
+    error,
+    isLoading,
+  } = useSWR(process.env.NEXT_PUBLIC_SPOTTY_ROUTE, fetcher);
   return (
-    <DivStyled>
+    <FooterDivStyled>
+      <div className="spottyContainer">
+        <p className="icon">
+          <BsSpotify size={30} />
+        </p>
+        <p className="text">
+          {spottyData?.isPlaying
+            ? `Currently Listening to ${spottyData?.songName} by
+            ${spottyData?.allArtists}`
+            : "Not Playing"}
+        </p>
+      </div>
       <div className="linkContainer">
         <ul>
           <a href="https://www.linkedin.com/in/bradley-caravana-4a9503175/">
@@ -125,6 +171,6 @@ export default function Footer() {
       <div className="footerText">
         <p>&copy; Bradley Caravana {new Date().getFullYear()}</p>
       </div>
-    </DivStyled>
+    </FooterDivStyled>
   );
 }

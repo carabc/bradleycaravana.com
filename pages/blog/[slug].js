@@ -11,7 +11,15 @@ import { useSWRConfig } from "swr";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import Link from "next/link";
-import Test from "@/components/Test";
+import {
+  HeadingThreeWithHighlight,
+  HeadingTwoWithHighlight,
+  HeadingOneWithHighlight,
+} from "@/components/MDXComponents/MDXComponents";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/night-owl.css";
+import { motion, useScroll } from "framer-motion";
+
 const MainStyled = styled.main`
   width: 90%;
   margin: 0 auto;
@@ -101,6 +109,9 @@ const SectionPost = styled.section`
   .headerContainer h1 {
     text-align: center;
   }
+  .postsContainer {
+    text-align: justify;
+  }
 
   @media (min-width: ${({ theme }) => theme.md}) {
     width: 70%;
@@ -122,7 +133,11 @@ const SectionPost = styled.section`
   }
 `;
 
-let components = { Test };
+let components = {
+  HeadingThreeWithHighlight,
+  HeadingTwoWithHighlight,
+  HeadingOneWithHighlight,
+};
 
 export default function Post({ frontmatter, mdxSource, slug }) {
   const { data, error, isLoading } = useSWR(
@@ -130,6 +145,7 @@ export default function Post({ frontmatter, mdxSource, slug }) {
     fetcher,
   );
   const { mutate } = useSWRConfig();
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     let canPost = true;
@@ -154,6 +170,7 @@ export default function Post({ frontmatter, mdxSource, slug }) {
 
   return (
     <Layout title="Bradley Caravana | Blog">
+      <motion.div style={{ scaleX: scrollYProgress }} className="progressBar" />
       <MainStyled>
         <div className="headerTitles">
           <h1>
@@ -166,7 +183,7 @@ export default function Post({ frontmatter, mdxSource, slug }) {
       </MainStyled>
       <SectionPost>
         <div className="headerContainer">
-          <h1>{frontmatter.title}</h1>
+          <h2>{frontmatter.title}</h2>
         </div>
         <div className="postsContainer">
           <MDXRemote {...mdxSource} components={components} />
@@ -227,7 +244,11 @@ export async function getStaticProps(context) {
   // grab the frontmatter and the content for this file
   let { data: frontmatter, content } = matter(text);
   // serialize the markdown so we can pass it to MDXRemote in the component
-  let mdxSource = await serialize(content);
+  let mdxSource = await serialize(content, {
+    mdxOptions: {
+      rehypePlugins: [rehypeHighlight],
+    },
+  });
 
   return {
     props: {

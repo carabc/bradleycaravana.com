@@ -11,7 +11,15 @@ import { useSWRConfig } from "swr";
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import Link from "next/link";
-import Test from "@/components/Test";
+import {
+  HeadingOneWithHighlight,
+  HeadingTwoWithHighlight,
+  HeadingThreeWithHighlight,
+} from "@/components/MDXComponents/MDXComponents";
+import { motion, useScroll } from "framer-motion";
+
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/night-owl.css";
 const MainStyled = styled.main`
   width: 90%;
   margin: 0 auto;
@@ -122,7 +130,11 @@ const SectionSnippet = styled.section`
   }
 `;
 
-let components = { Test };
+let components = {
+  HeadingOneWithHighlight,
+  HeadingTwoWithHighlight,
+  HeadingThreeWithHighlight,
+};
 
 export default function Snippet({ frontmatter, mdxSource, slug }) {
   const { data, error, isLoading } = useSWR(
@@ -130,6 +142,7 @@ export default function Snippet({ frontmatter, mdxSource, slug }) {
     fetcher,
   );
   const { mutate } = useSWRConfig();
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     let canPost = true;
@@ -154,6 +167,7 @@ export default function Snippet({ frontmatter, mdxSource, slug }) {
 
   return (
     <Layout title="Bradley Caravana | Blog">
+      <motion.div style={{ scaleX: scrollYProgress }} className="progressBar" />
       <MainStyled>
         <div className="headerTitles">
           <h1>
@@ -227,7 +241,11 @@ export async function getStaticProps(context) {
   // grab the frontmatter and the content for this file
   let { data: frontmatter, content } = matter(text);
   // serialize the markdown so we can pass it to MDXRemote in the component
-  let mdxSource = await serialize(content);
+  let mdxSource = await serialize(content, {
+    mdxOptions: {
+      rehypePlugins: [rehypeHighlight],
+    },
+  });
 
   return {
     props: {
