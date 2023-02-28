@@ -1,0 +1,47 @@
+---
+title: Sort an Array of JavaScript Objects by a Date
+author: Bradley Caravana
+description: Simple snippet, sort an array of objects by date (either ascending or descending)
+date: 02/27/2023
+tag: JavaScript
+---
+
+Simple snippet, sort an array of objects by date (either ascending or descending)
+
+The trick here is to convert the value to a JavaScript date object:
+
+```js
+const sortDateDesc = (a. b) => {
+    return new Date(b.date) - new Date(a.date)
+}
+
+const sortDateAsc = (a, b) => {
+    return new Date(a.date) - new Date(b.date)
+}
+```
+
+Use these functions:
+
+```js
+let arr = [
+    {
+        firstName: 'Bradley',
+        lastName: 'Caravana',
+        createdDate: '01/21/1998'
+    }
+    {
+        firstName: 'John',
+        lastName: 'Doe',
+        createdDate: '04/03/1979'
+    }
+    {
+        firstName: 'Jane',
+        lastName: 'Doe',
+        createdDate: '08/21/1985'
+    }
+]
+
+let sortedArrDesc = arr.sort(sortDateDesc);
+let sortedArrAsc = arr.sort(sortDateAsc);
+
+```

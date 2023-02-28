@@ -1,0 +1,70 @@
+---
+title: Map an Array of Headers to an Array of Values
+author: Bradley Caravana
+description: If you have a nested array of rows (array of arrays), use this snippet to match them up with an array of header values.
+date: 02/27/2023
+tag: JavaScript
+---
+
+If you have a nested array of rows (array of arrays), use this snippet to match them up with an array of header values.
+
+E.x., say you have an array such as the one below:
+
+```js
+const valArr = [
+  ["val1", "val2", "val3"],
+  ["val1", "val2", "val3"],
+  ["val1", "val2", "val3"],
+];
+```
+
+And you also have this array of headers:
+
+```js
+const headers = [col1, col2, col3];
+```
+
+Use this snippet to join them together:
+
+```js
+let returningArray = valArr.map((rowArr, indexOfRowArr) => {
+  let finalObj = rowArr.reduce(
+    (accu, currentValueOfRowArr, indexOfCurrentValueOfRowArr) => {
+      let objToPush = {};
+
+      let currentHeader = headers[indexOfCurrentValueOfRowArr];
+      if (currentHeader in accu) {
+        console.log("duplicate header");
+        return accu;
+      } else {
+        accu[currentHeader] = currentValueOfRowArr;
+      }
+      return accu;
+    },
+    {},
+  );
+  return finalObj;
+});
+```
+
+Your final array should look something like this:
+
+```js
+[
+  {
+    col1: "val1",
+    col2: "val2",
+    col3: "val3",
+  },
+  {
+    col1: "val1",
+    col2: "val2",
+    col3: "val3",
+  },
+  {
+    col1: "val1",
+    col2: "val2",
+    col3: "val3",
+  },
+];
+```
