@@ -206,10 +206,9 @@ export default function Home({ posts }) {
         </h2>
         <div className="textContainer">
           <p>
-            Hey, my name is Bradley Caravana. But you probably knew that already
-            based on the domain and the gigantic text at the top. I&apos;m a
-            Full Stack Developer at Maxim Group LLC. programming in C#,
-            JavaScript, SQL, NodeJS, Express, and React.
+            Hey, my name is Bradley Caravana. I&apos;m a Full Stack Developer at
+            Maxim Group LLC programming in JavaScript, SQL, C#, NodeJS, Express,
+            and React. I live on (not in) Long Island, New York.
           </p>
           <p>
             I work in a team of like minded programmers who are always looking
@@ -217,28 +216,11 @@ export default function Home({ posts }) {
             employees of our firm.
           </p>
           <p>
-            I live on (not in) Long Island, New York, and attended classes at
-            Farmingdale State College for Computer Programming & Information
-            Technology. I graduated in 2021 with a 3.9 GPA (so close!) and
-            honors.
-          </p>
-          <p>
             When my head isn&apos;t buried in code and documentation, I love to
             go on long runs, listen to music, learn new technology, and tinker
             with hardware & reparing circuit boards with my trusty iron.
           </p>
-          <p>
-            And that&apos;s it for me. I&apos;m a simple person. I love my
-            friends. I love my family.
-          </p>
-          <p>
-            See some of my latest blog posts below, and check all of them out{" "}
-            <Link href="/blog" legacyBehavior>
-              <a>here</a>
-            </Link>
-            . Feel free to shoot me an email at bradleycaravana@gmail.com.
-            Thanks for stopping by.
-          </p>
+          <p>See some of my latest blog posts below.</p>
         </div>
       </SectionAboutStyled>
       <SectionBlogPostStyled>
