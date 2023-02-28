@@ -135,7 +135,7 @@ const SectionSnippetsStyled = styled.section`
 
 export default function Snippets({ snippets }) {
   return (
-    <Layout title="Bradley Caravana | Blog">
+    <Layout title="Bradley Caravana | Snippets">
       <MainStyled>
         <div className="headerTitles">
           <h1>

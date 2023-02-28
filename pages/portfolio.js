@@ -114,7 +114,7 @@ const SectionReposStyled = styled.section`
 
 export default function Portfolio({ repos }) {
   return (
-    <Layout title="Bradley Caravana | Blog">
+    <Layout title="Bradley Caravana | Portfolio">
       <MainStyled>
         <div className="headerTitles">
           <h1>
