@@ -125,8 +125,8 @@ export default function Portfolio({ repos }) {
           </cite>
           <div className="subHeaderBlock">
             <p>
-              Alright, let&apos;s address the elephant in the room. I re-build
-              my website a lot. But that&apos;s for a couple of reasons.
+              Alright, let&apos;s address the elephant in the room. I rebuild my
+              website a lot. But that&apos;s for a couple of reasons.
             </p>
             <p>
               As I&apos;ve mentioned before, I love to build and learn. I come
@@ -139,11 +139,11 @@ export default function Portfolio({ repos }) {
             </p>
             <p>
               This is why a lot of the repos I have on Github are old websites.
-              But there&apos;s a couple of funny party trick apps in there as
-              well. Most of my time is spent developing for work. Making more
-              projects to stick on GitHub is always a goal of mine I&apos;m
-              trying to reach. Feel free to download some of my projects and
-              take a look around.
+              But there are a couple of fun party trick apps in there as well.
+              Most of my time is spent developing for work. Making more projects
+              to stick on GitHub is always a goal of mine that I&apos;m trying
+              to reach. Feel free to download some of my projects and take a
+              look around.
             </p>
           </div>
         </div>

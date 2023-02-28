@@ -211,14 +211,14 @@ export default function Home({ posts }) {
             and React. I live on (not in) Long Island, New York.
           </p>
           <p>
-            I work in a team of like minded programmers who are always looking
+            I work in a team of like-minded programmers who are always looking
             to automate and improve the workflow of not only us, but the
             employees of our firm.
           </p>
           <p>
             When my head isn&apos;t buried in code and documentation, I love to
             go on long runs, listen to music, learn new technology, and tinker
-            with hardware & reparing circuit boards with my trusty iron.
+            with hardware & repair circuit boards with my trusty iron.
           </p>
           <p>See some of my latest blog posts below.</p>
         </div>

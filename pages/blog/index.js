@@ -129,8 +129,8 @@ export default function Blog({ posts }) {
             <p>This is not another developer blog.</p>
             <p>
               I&apos;ll be posting about anything and everything, not just code
-              (I hope).I started my first blog back in the summer of 2020 when I
-              really hit the ground running with being a developer. I dove
+              (I hope). I started my first blog back in the summer of 2020 when
+              I really hit the ground running with being a developer. I dove
               head-first into front-end frameworks, templating engines, APIs,
               NodeJS, Express, and ORMs.
             </p>
