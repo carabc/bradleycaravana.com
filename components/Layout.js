@@ -30,20 +30,8 @@ export default function Layout({
         <meta property="og:title" content={title} key="ogtitle" />
         <meta propery="og:site_name" content={title} key="ogsitename" />
         <meta property="og:description" content={description} key="ogdesc" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        />
-
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <ContentContainerDivStyled>
-        <div className="navContainer"></div>
         <Navigation />
         <MobileNagivation />
         {children}
