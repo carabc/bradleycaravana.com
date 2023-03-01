@@ -52,7 +52,9 @@ export default class MyDocument extends Document {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-T216WBQ3NE');
+            gtag('config', 'G-T216WBQ3NE', {
+              page_path: window.location.pathname,
+            });
           `,
             }}
           />
