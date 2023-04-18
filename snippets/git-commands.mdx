@@ -1,0 +1,128 @@
+---
+title: Helpful Git Commands and Configurations
+author: Bradley Caravana
+description: Helpful Git commands
+date: 04/17/2023
+tag: Bash
+---
+
+### Git Configurations
+
+```bash
+# Display all global config settings
+git config --global --list
+# Set global user name
+git config --global user.name "Bradley Caravana"
+# Set global user email
+git config --global user.email "bradleycaravana@gmail.com"
+# Remove global user name
+git config --global --unset user.name
+# Remove global user email
+git config --global --unset user.email
+```
+
+### Git .ignore Syntax
+
+```
+Ignore a specific file: file
+Ignore a specific file in the current directory or a hidden file: .file
+Ignore all files with a specific extension: \*.ext
+Ignore all files in a specific directory: dir/
+Ignore all files in a specific subdirectory: dir/dir2/
+Ignore all files with a certain extension in a subdirectory: dir/dir2/\*.ext
+Recursively match all files with a certain extension in a subdirectory: dir/dir2/\*_/_.ext
+Don't ignore a specific file :!file
+Don't ignore all files with a specific extension: !\*.ext
+Don't ignore all files in a specific directory :!dir/
+```
+
+### Init / Clone a Git Repository
+
+```bash
+# Initialize a new Git repository
+git init
+# Clone a Git repository
+git clone https://github.com/repo.git
+# Track a single file
+git add file.txt
+# Track all files that are untracked or have been modified
+git add .
+# Commit changes
+git commit -m "Commit message"
+#Modify the last commit
+git commit --amend -m "New commit message"
+# Push changes to remote repository
+git push
+```
+
+### Status / Log
+
+```bash
+# Display the status of the current Git repository
+git status
+# Display the log of the current Git repository
+git log
+# Show the latest commit in the current branch
+git show HEAD
+```
+
+### Branches
+
+```bash
+# List all branches
+git branch
+# Create a new branch
+git branch branch_name
+# Rename a branch
+git branch -m old_branch_name new_branch_name
+# Replace file with the latest version of the file on the current branch
+git checkout -- file_name
+# Switch to a branch
+git checkout branch_name
+# Create a new branch and switch to it
+git checkout -b branch_name
+# Delete a branch
+git branch -d branch_name
+# Delete a branch (force)
+git branch -D branch_name
+# Merge a branch into the current branch
+git merge branch_name
+```
+
+### Remote Branches
+
+```bash
+# List all remote branches
+git branch -r
+# List all local and remote branches
+git branch -a
+# Show the remote branches and their associated URLs
+git remote -v
+# Add an https url as remote branch and name it origin
+git remote add -f origin https://github.com/repo.git
+# Clean up remote non-existent branches
+git remote prune origin
+# set the upstream branch , to which changes will be pushed, to origin/master
+git branch --set-upstream-to=origin/master
+# Update local tracking branches with changes from their respective remotes ones
+git fetch
+# Update local tracking branch and merge changes with local working directory
+git pull
+# Given one or more existing commits, apply the change each one introduces
+git cherry-pick commitid
+# Push HEAD to the upstream URL
+git push
+# Push HEAD to the branch master on the remote origin
+git push origin master
+# Push and set origin master as upstream
+git push -u origin master
+```
+
+### Branch Comparison
+
+```bash
+# Compare the current branch with the master branch
+git diff master
+# OR
+git diff branch1..branch2
+```
