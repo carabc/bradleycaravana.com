@@ -15,5 +15,9 @@ jobs:
       - name: Install Dependencies
         run: sudo npm install
 
+      - name: Fetch Host Key
+        run: ssh-keyscan -t rsa ${{secrets.DROPLET_IP}} >> ~/.ssh/known_hosts
+
       - name: Build and Deploy
-        run: ssh bradley@${{secrets.DROPLET_IP}} "cd /var/www/dev.bradleycaravana.com && sudo git pull && sudo rm -rf ./node_modules && sudo npm install && sudo npm run build && sudo pm2 restart all"
+        run: |
+          ssh bradley@${{secrets.DROPLET_IP}} "cd /var/www/dev.bradleycaravana.com && sudo git pull && sudo rm -rf ./node_modules && sudo npm install && sudo npm run build && sudo pm2 restart all"
