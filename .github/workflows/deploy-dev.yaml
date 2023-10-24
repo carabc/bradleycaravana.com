@@ -17,4 +17,4 @@ jobs:
           sudo rm -rf node_modules
           sudo npm install
           sudo npm run build
-          pm2 restart all
+          sudo pm2 restart all
