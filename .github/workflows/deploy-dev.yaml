@@ -16,4 +16,4 @@ jobs:
         run: sudo npm install
 
       - name: Build and Deploy
-        run: ssh ${{secrets.DROPLET_USER}}@${{secrets.DROPLET_IP}} "cd /var/www/dev.bradleycaravana.com && sudo git pull && sudo rm -rf ./node_modules && sudo npm install && sudo npm run build && sudo pm2 restart all"
+        run: ssh bradley@${{secrets.DROPLET_IP}} "cd /var/www/dev.bradleycaravana.com && sudo git pull && sudo rm -rf ./node_modules && sudo npm install && sudo npm run build && sudo pm2 restart all"
