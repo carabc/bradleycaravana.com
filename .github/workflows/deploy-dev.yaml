@@ -1,0 +1,19 @@
+name: Deploy to Dev Site
+run-name: Deploying to Dev Site
+on:
+  push:
+    branches:
+      - "dev"
+jobs:
+  deploy-to-dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: sudo npm install
+
+      - name: Build and Deploy
+        run: ssh ${{secrets.DROPLET_USER}}@${{secrets.DROPLET_IP}} "cd /var/www/dev.bradleycaravana.com && sudo git pull && sudo rm -rf ./node_modules && sudo npm install && sudo npm run build && sudo pm2 restart all"
