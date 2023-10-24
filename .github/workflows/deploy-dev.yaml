@@ -11,11 +11,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
       - name: Install Dependencies
         run: sudo npm install
-
-      - name: Fetch Host Key
-        run: ssh-keyscan -t rsa ${{secrets.DROPLET_IP}} >> ~/.ssh/known_hosts
 
       - name: Build and Deploy
         run: |
