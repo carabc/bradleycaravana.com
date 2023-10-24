@@ -11,7 +11,9 @@ jobs:
     steps:
       - name: Build and Deploy
         run: |
+          pm2 stop all
           cd /var/www/dev.bradleycaravana.com
           sudo git pull
           sudo npm install
           sudo npm run build
+          pm2 restart all
