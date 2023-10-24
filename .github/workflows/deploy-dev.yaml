@@ -11,4 +11,6 @@ jobs:
     steps:
       - name: Build and Deploy
         run: |
-          cd /var/www/dev.bradleycaravana.com && sudo git pull && sudo rm -rf ./node_modules && sudo npm install && sudo npm run build && sudo pm2 restart all
+          sudo git pull
+          sudo npm install
+          sudo npm run build
