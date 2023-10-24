@@ -207,8 +207,9 @@ export default function Home({ posts }) {
         <div className="textContainer">
           <p>
             Hey, my name is Bradley Caravana. I&apos;m a Full Stack Developer at
-            Maxim Group LLC programming in JavaScript, SQL, C#, NodeJS, Express,
-            and React. I live on (not in) Long Island, New York.
+            Farmingdale State College where I manage a team and the
+            institution&apos;s web presence. I live on (not in) Long Island, New
+            York.
           </p>
           <p>
             I work in a team of like-minded programmers who are always looking
