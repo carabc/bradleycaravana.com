@@ -14,6 +14,7 @@ jobs:
           sudo pm2 stop all
           cd /var/www/dev.bradleycaravana.com
           sudo git pull
+          sudo rm -rf node_modules
           sudo npm install
           sudo npm run build
           pm2 restart all
