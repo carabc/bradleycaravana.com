@@ -208,7 +208,7 @@ export default function Home({ posts }) {
         <div className="textContainer">
           <p>
             Hey, my name is Bradley Caravana. I&apos;m a Full Stack Developer at
-            Farmingdale State College where I manage a team and the
+            Farmingdale State College where I manage both a team, and the
             institution&apos;s web presence. I live on (not in) Long Island, New
             York.
           </p>
