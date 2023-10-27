@@ -37,9 +37,9 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          echo ${{secrets.USER_PASSWORD}} | sudo pm2 stop all
+          echo ${{secrets.USER_PASSWORD}} | sudo -S pm2 stop all
           cd /var/www/dev.bradleycaravana.com
-          echo ${{secrets.USER_PASSWORD}} | sudo git pull
-          echo ${{secrets.USER_PASSWORD}} | sudo npm install
-          echo ${{secrets.USER_PASSWORD}} | sudo npm run build
-          echo ${{secrets.USER_PASSWORD}} | sudo pm2 restart all
+          echo ${{secrets.USER_PASSWORD}} | sudo -S git pull
+          echo ${{secrets.USER_PASSWORD}} | sudo -S npm install
+          echo ${{secrets.USER_PASSWORD}} | sudo -S npm run build
+          echo ${{secrets.USER_PASSWORD}} | sudo -S pm2 restart all
