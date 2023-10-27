@@ -37,8 +37,9 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          echo 'Hello'
-          # cd /var/www/youtube.com/
-          # git pull origin main
-          # git status
-          # npm install --only=prod
+          sudo pm2 stop all
+          cd /var/www/dev.bradleycaravana.com
+          sudo git pull
+          sudo npm install
+          sudo npm run build
+          sudo pm2 restart all
