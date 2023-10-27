@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Build and Deploy
         run: |
-          ssh -tt root@24.199.90.153
+          ssh -tt bradley@${{secrets.DROPLET_IP}}
           # sudo pm2 stop all
           # cd /var/www/dev.bradleycaravana.com
           # sudo git pull
