@@ -179,10 +179,11 @@ export default function Home({ posts }) {
       <MainStyled>
         <div className="headerTitles">
           <h1>
-            Bradley <span className="hl">Test</span>
+            Bradley <span className="hl">Caravana</span>
           </h1>
           <cite className="subHeader">
-            I&apos;m a Full Stack Developer at Maxim Group LLC.
+            {/* I&apos;m a Full Stack Developer at Maxim Group LLC. */}
+            I&apos;m the Manager of Web Development &amp; Operations at Farmingdale State College.
           </cite>
           <div className="subHeaderBlock">
             <p>And I know absolutely nothing about anything.</p>
