@@ -5,7 +5,7 @@ run-name: Deploying to Dev Site
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ dev ]
+    branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -25,7 +25,7 @@ jobs:
         port: 22
         script: |
           echo ${{secrets.USER_PASSWORD}} | sudo -S pm2 stop all
-          cd /var/www/dev.bradleycaravana.com
+          cd /var/www/bradleycaravana.com
           echo ${{secrets.USER_PASSWORD}} | sudo -S git pull
           echo ${{secrets.USER_PASSWORD}} | sudo -S npm install
           echo ${{secrets.USER_PASSWORD}} | sudo -S npm run build
