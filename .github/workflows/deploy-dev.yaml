@@ -11,10 +11,11 @@ jobs:
     steps:
       - name: Build and Deploy
         run: |
-          sudo pm2 stop all
-          cd /var/www/dev.bradleycaravana.com
-          sudo git pull
-          sudo rm -rf node_modules
-          sudo npm install
-          sudo npm run build
-          sudo pm2 restart all
+          ssh root@24.199.90.153
+          # sudo pm2 stop all
+          # cd /var/www/dev.bradleycaravana.com
+          # sudo git pull
+          # sudo rm -rf node_modules
+          # sudo npm install
+          # sudo npm run build
+          # sudo pm2 restart all
