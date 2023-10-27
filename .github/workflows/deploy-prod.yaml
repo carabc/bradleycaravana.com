@@ -1,5 +1,5 @@
-name: Deploy to Dev Site
-run-name: Deploying to Dev Site
+name: Deploy to Prod Site
+run-name: Deploying to Prod Site
 
 # Controls when the action will run. 
 on:
