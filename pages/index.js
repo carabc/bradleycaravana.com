@@ -179,7 +179,7 @@ export default function Home({ posts }) {
       <MainStyled>
         <div className="headerTitles">
           <h1>
-            Bradley <span className="hl">Caravana</span>
+            Bradley <span className="hl">Test</span>
           </h1>
           <cite className="subHeader">
             I&apos;m a Full Stack Developer at Maxim Group LLC.
