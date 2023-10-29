@@ -237,32 +237,6 @@ export default function Home({ posts }) {
           </div>
         </div>
       </HeaderStyled>
-      {/* <MainStyled>
-        <div className="headerTitles">
-          <div className="contentContainer">
-            <h1>
-              Bradley <span className="hl">Caravana</span>
-            </h1>
-            <cite className="subHeader">
-              I&apos;m a Full Stack Developer at Maxim Group LLC.
-            </cite>
-            <div className="subHeaderBlock">
-              <p>And I know absolutely nothing about anything.</p>
-              <p>But I&apos;m damn good at learning.</p>
-            </div>
-          </div>
-        </div>
-        <div className="imageContainer">
-          <Image
-            placeholder="blur"
-            src={headshot}
-            width={250}
-            height={250}
-            alt="Photo of Bradley Caravana"
-            className="img"
-          />
-        </div>
-      </MainStyled> */}
       <SectionAboutStyled>
         <h2>
           About <span className="hl">Me</span>
