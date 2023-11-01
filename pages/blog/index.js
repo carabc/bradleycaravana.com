@@ -123,7 +123,7 @@ export default function Blog({ posts }) {
             Bradley <span className="hl">Caravana</span>
           </h1>
           <cite className="subHeader">
-            I&apos;m a Full Stack Developer at Maxim Group LLC.
+            Manager of Web Development & Operations
           </cite>
           <div className="subHeaderBlock">
             <p>This is not another developer blog.</p>

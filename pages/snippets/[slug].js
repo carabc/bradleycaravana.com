@@ -166,7 +166,7 @@ export default function Snippet({ frontmatter, mdxSource, slug }) {
   }, []);
 
   return (
-    <Layout title="Bradley Caravana | Blog">
+    <Layout title="Bradley Caravana | Snippets">
       <motion.div style={{ scaleX: scrollYProgress }} className="progressBar" />
       <MainStyled>
         <div className="headerTitles">

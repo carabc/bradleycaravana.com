@@ -11,62 +11,98 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const MainStyled = styled.main`
+// the cite tag is an inline element, and it can't have a line-height smaller than the line-height of the parent element. Have to define a line-height of the parents, header, and then the cite tag can be larger than that. Give the header a line-height that is small and adjust from there.
+const HeaderStyled = styled.header`
   display: flex;
+  
+  justify-content: center;
+  line-height: 1;
   flex-direction: column;
-  align-items: center;
+  margin: 1em 0 2em 0;
 
-  .headerTitles {
-    order: 2;
+  .contentContainer {
+    max-width: 90%;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    color: #fff;
-    h1 {
-      margin: 0 0 0 0;
-      font-size: 2em;
+    flex-direction: column;
+
+    .titles {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      order: 2;
+      align-items: center;
+      margin: 1em 0 0 0;
+
+      h1 {
+        margin: 0;
+        color: #fff;
+      }
+
+      cite.subHeader {
+        margin: 0;  
+        line-height: 1.4;
+        color: #fff;
+        font-size: 0.85rem;
+      }
+
+      .subHeaderTitles {
+        color: ${({ theme }) => theme.dark.fg};
+        margin: 0;
+        font-size: 0.85rem;
+
+        p {
+          margin: .5em 0 0 0;
+        }
+      }
     }
 
-    cite {
-      font-size: 0.85em;
-    }
-
-    .subHeaderBlock {
-      margin-top: 0.5em;
-    }
-
-    .subHeaderBlock p {
-      color: ${({ theme }) => theme.dark.fg};
-      margin: 0;
-      font-size: 0.85rem;
-    }
-  }
-
-  .imageContainer {
-    order: 1;
-
-    .img {
-      user-select: none;
+    .imageBlock {
+      order: 1;
+      
     }
   }
 
   @media (min-width: ${({ theme }) => theme.md}) {
-    flex-direction: row;
-    justify-content: center;
-    gap: 2em;
+    margin: 0;
+    
 
-    .headerTitles {
-      order: 1;
-      align-items: start;
+    .contentContainer {
+      width: 70%;
+      flex-direction: row;
+      gap: .45em;
+      
+      justify-content: center;
 
-      .subHeaderBlock p {
-        text-align: start;
+      .titles {
+        order: 1;
+        margin: 0;  
+      }
+
+      .imageBlock {
+        order: 2;
+        margin: 0;
       }
     }
+    
+  }
 
-    .imageContainer {
-      order: 2;
+  @media (min-width: 1280px) and (max-width: 1650px) {
+    .contentContainer {
+      width: 50%;
     }
+  }
+
+  @media (min-width: 1651px) {
+
+    .contentContainer {
+      width: 35%;
+      
+      
+    }
+
+    
   }
 `;
 
@@ -176,47 +212,48 @@ const SectionBlogPostStyled = styled.section`
 export default function Home({ posts }) {
   return (
     <Layout>
-      <MainStyled>
-        <div className="headerTitles">
-          <h1>
-            Bradley <span className="hl">Caravana</span>
-          </h1>
-          <cite className="subHeader">
-            I&apos;m a Full Stack Developer at Maxim Group LLC.
-            {/* I&apos;m the Manager of Web Development &amp; Operations at Farmingdale State College. */}
-          </cite>
-          <div className="subHeaderBlock">
-            <p>And I know absolutely nothing about anything.</p>
-            <p>But I&apos;m damn good at learning.</p>
+      {/* <MainStyled>
+        
+      </MainStyled> */}
+      <HeaderStyled>
+        <div className='contentContainer'>
+          <div className='titles'>
+            <h1>Bradley <span className='hl'>Caravana</span></h1>
+            <cite className='subHeader'>Manager of Web Development & Operations</cite>
+            <div className='subHeaderTitles'>
+              <p>And I know absolutely nothing about anything.</p>
+              <p>But I&apos;m damn good at learning.</p>
+            </div>
+          </div>  
+          <div className='imageBlock'>
+            <Image
+              placeholder="blur"
+              src={headshot}
+              width={250}
+              height={250}
+              alt="Photo of Bradley Caravana"
+              className="img"
+            />
           </div>
         </div>
-        <div className="imageContainer">
-          <Image
-            placeholder="blur"
-            src={headshot}
-            width={250}
-            height={250}
-            alt="Photo of Bradley Caravana"
-            className="img"
-          />
-        </div>
-      </MainStyled>
+      </HeaderStyled>
       <SectionAboutStyled>
         <h2>
           About <span className="hl">Me</span>
         </h2>
         <div className="textContainer">
           <p>
-            Hey, my name is Bradley Caravana. I&apos;m a Full Stack Developer at
-            Farmingdale State College where I manage both a team, and the
+            Hey, my name is Bradley Caravana. I&apos;m the Manager of Web Development & Operations at
+            Farmingdale State College where I oversee both a team, and the
             institution&apos;s web presence. I live on (not in) Long Island, New
             York.
           </p>
-          <p>
+          {/* <p>
             I work in a team of like-minded programmers who are always looking
             to automate and improve the workflow of not only us, but the
             employees of our firm.
-          </p>
+          </p> */}
+          <p>I lead a team of developers that analyze our web data, update the website, and collaboarate with me on maintaining our platform while providing web-change support to multiple departments across campus. </p>
           <p>
             When my head isn&apos;t buried in code and documentation, I love to
             go on long runs, listen to music, learn new technology, and tinker
