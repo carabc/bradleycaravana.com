@@ -77,7 +77,8 @@ const HeaderStyled = styled.header`
 
       .titles {
         order: 1;
-        margin: 0;  
+        margin: 0; 
+        align-items: start;
       }
 
       .imageBlock {
