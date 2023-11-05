@@ -220,7 +220,7 @@ export default function Home({ posts }) {
         <div className='contentContainer'>
           <div className='titles'>
             <h1>Bradley <span className='hl'>Caravana</span></h1>
-            <cite className='subHeader'>Manager of Web Development & Operations</cite>
+            <cite className='subHeader'>Manager of Web Development &amp; Operations</cite>
             <div className='subHeaderTitles'>
               <p>And I know absolutely nothing about anything.</p>
               <p>But I&apos;m damn good at learning.</p>

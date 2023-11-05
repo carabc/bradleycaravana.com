@@ -142,7 +142,7 @@ export default function Snippets({ snippets }) {
             Bradley <span className="hl">Caravana</span>
           </h1>
           <cite className="subHeader">
-            Manager of Web Development & Operations
+            Manager of Web Development &amp; Operations
           </cite>
           <div className="subHeaderBlock">
             <p>

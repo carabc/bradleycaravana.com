@@ -177,7 +177,7 @@ export default function Post({ frontmatter, mdxSource, slug }) {
             Bradley <span className="hl">Caravana</span>
           </h1>
           <cite className="subHeader">
-            I&apos;m a Full Stack Developer at Maxim Group LLC.
+            Manager of Web Development &amp; Operations
           </cite>
         </div>
       </MainStyled>
