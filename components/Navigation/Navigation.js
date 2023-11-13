@@ -8,15 +8,17 @@ const NavStyled = styled.nav`
   height: 5em;
   display: flex;
   align-items: center;
+  margin: 0 auto;
   margin-top: 2em;
 
   ul {
     display: flex;
     list-style: none;
-    margin: 0;
+    margin: 0 auto;
     gap: 3em;
     width: 100%;
     justify-content: center;
+    padding: 0;
 
     li {
       padding: 0.25em 1em;
@@ -37,7 +39,21 @@ const NavStyled = styled.nav`
     }
   }
 
-  @media (max-width: ${({ theme }) => theme.md}) {
+  @media(min-width: ${({ theme }) => theme.md}) {
+    width: 70%;
+  }
+
+  @media (min-width: 1280px) and (max-width: 1650px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1651px) {
+    width: 30%;
+  }
+
+  
+
+  @media (max-width: 767px) {
     display: none;
   }
 `;
@@ -46,7 +62,6 @@ export default function Navigation() {
   const pathName = usePathname();
 
   return (
-    <>
       <NavStyled>
         <ul>
           <li>
@@ -76,6 +91,5 @@ export default function Navigation() {
           </li>
         </ul>
       </NavStyled>
-    </>
   );
 }
