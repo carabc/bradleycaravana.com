@@ -9,7 +9,7 @@ const DivStyled = styled.div`
 export default function ViewCounter({ slug }) {
   const { data, error, isLoading } = useSWR(
     `${process.env.NEXT_PUBLIC_VIEW_ROUTE}/${slug}`,
-    fetcher,
+    fetcher
   );
 
   if (error) return <p>!</p>;
