@@ -40,7 +40,6 @@ export default async function handler(req, res) {
 }
 
 /*
-//
 OLD PRISMA SOLUTIONS BELOW USING PLANET SCALE
  const postViews = await prisma.tblViews.findFirst({
         where: {
